@@ -1,0 +1,24 @@
+#define PIN_LED 13
+
+unsigned int count = 0;  // 카운터 초기화
+int toggle = 0;          // 토글 값 초기화
+
+void setup() {
+  pinMode(PIN_LED, OUTPUT);  // LED 핀을 출력 모드로 설정
+  Serial.begin(115200);      // 시리얼 통신 초기화
+
+  // 시리얼 포트가 연결될 때까지 대기
+  while (!Serial) {
+    ;  // 아무 작업도 하지 않음
+  }
+
+  Serial.println("Hello World!");  // "Hello World!" 메시지를 시리얼 모니터에 출력
+  digitalWrite(PIN_LED, LOW);      // LED를 끈 상태로 시작
+}
+
+void loop() {
+  Serial.println(++count);     // 카운터 값을 증가시키고 출력
+  toggle = !toggle;            // LED 상태를 토글(반전)
+  digitalWrite(PIN_LED, toggle);  // LED의 상태를 업데이트
+  delay(1000);                 // 1초(1000밀리초) 대기
+}
